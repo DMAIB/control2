@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Auth from './components/Auth';
-import Register from './components/Register';
-import Main from './components/Main';
-import Header from './components/Header'; // Импортируем хедер
+import Auth from './components/Auth/Auth';
+import Register from './components/Register/Register';
+import Main from './components/Main/Main';
+import Header from './components/Header/Header'; // Импортируем хедер
 
 function App() {
   return (
