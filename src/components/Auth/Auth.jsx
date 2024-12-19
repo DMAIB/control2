@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthContext'; // Импортируем useAuth
 import './Auth.scss'; // Импортируем стили
 import googleImg from '../Pict/G.png';
 import facebookImg from '../Pict/F.png';
@@ -8,29 +9,29 @@ import facebookImg from '../Pict/F.png';
 const Auth = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
+  const { login } = useAuth(); // Получаем функцию login из контекста
 
   const onSubmit = (data) => {
     const user = JSON.parse(localStorage.getItem('user'));
     if (user && user.email === data.email && user.password === data.password) {
-      navigate('/main');
+      login(); // Вызываем функцию login
+      navigate('/main'); // Перенаправляем на главную страницу после успешного входа
     } else {
-      alert('Invalid credentials');
+      alert('Неправильный логин или пароль. Попробуйте снова.');
     }
   };
-
-  
 
   return (
     <div className="auth-container">
       <h2>Авторизация</h2>
-      <p>У вас еще нет аккаунта ? <a href="/register" class="register-link">Зарегистрируйтесь</a></p>
+      <p>У вас еще нет аккаунта ? <a href="/register" className="register-link">Зарегистрируйтесь</a></p>
       
       <div className="social-buttons">
         <button className="social-button google-button">
-        <img src={googleImg} alt="Google" /> Google
+          <img src={googleImg} alt="Google" /> Google
         </button>
         <button className="social-button facebook-button">
-        <img src={facebookImg} alt="Facebook"/> Facebook
+          <img src={facebookImg} alt="Facebook"/> Facebook
         </button>
       </div>
       

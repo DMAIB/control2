@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import './Main.scss'; // Импорт стилей, если нужны
-import Header from '../Header/Header'; // Импортируем Header
-
+import './Main.scss'; // Импорт стилей
+import { useCart } from './CartContext'; // Импортируйте useCart
 import ebayImage from '../Pict/eBay.png';
 import yooxImage from '../Pict/Yoox.png';
 import zaraImage from '../Pict/Zara.png';
@@ -12,61 +11,51 @@ const products = [
     {
         image: ebayImage,
         name: 'eBay',
-        description: 'Веб-сайтом eBay.com и его местными версиями в нескольких странах владела компания eBay Enterprise, ',
+        description: 'Веб-сайтом eBay.com и его местными версиями в нескольких странах владела компания eBay Enterprise.',
         deliveryTime: 'до 7 дней',
         deliveryFee: 0.68,
     },
     {
         image: yooxImage,
         name: 'YOOX',
-        description: 'Веб-сайтом eBay.com и его местными версиями в нескольких странах владела компания eBay Enterprise, ',
+        description: 'Веб-сайтом eBay.com и его местными версиями в нескольких странах владела компания eBay Enterprise.',
         deliveryTime: 'до 7 дней',
         deliveryFee: 0.68,
     },
     {
         image: zaraImage,
         name: 'ZARA',
-        description: 'Веб-сайтом eBay.com и его местными версиями в нескольких странах владела компания eBay Enterprise, ',
+        description: 'Веб-сайтом eBay.com и его местными версиями в нескольких странах владела компания eBay Enterprise.',
         deliveryTime: 'до 7 дней',
         deliveryFee: 0.68,
     },
     {
         image: ebayImage,
         name: 'eBay',
-        description: 'Веб-сайтом eBay.com и его местными версиями в нескольких странах владела компания eBay Enterprise, ',
+        description: 'Веб-сайтом eBay.com и его местными версиями в нескольких странах владела компания eBay Enterprise.',
         deliveryTime: 'до 7 дней',
         deliveryFee: 0.68,
     },
     {
         image: kithenAidImage,
         name: 'KITHEN AID',
-        description: 'Веб-сайтом eBay.com и его местными версиями в нескольких странах владела компания eBay Enterprise, ',
+        description: 'Веб-сайтом eBay.com и его местными версиями в нескольких странах владела компания eBay Enterprise.',
         deliveryTime: 'до 7 дней',
         deliveryFee: 0.68,
     },
     {
         image: yooxImage,
         name: 'YOOX',
-        description: 'Веб-сайтом eBay.com и его местными версиями в нескольких странах владела компания eBay Enterprise, ',
+        description: 'Веб-сайтом eBay.com и его местными версиями в нескольких странах владела компания eBay Enterprise.',
         deliveryTime: 'до 7 дней',
         deliveryFee: 0.68,
     },
 ];
 
 const Main = () => {
-    const [cartCount, setCartCount] = useState(0); // Состояние для количества товаров в корзине
-    const [addedProducts, setAddedProducts] = useState([]); // Состояние для отслеживания добавленных товаров
-
-    const addToCart = (index) => {
-        if (!addedProducts.includes(index)) {
-            setCartCount(cartCount + 1); // Увеличиваем количество товаров в корзине
-            setAddedProducts([...addedProducts, index]); // Добавляем индекс продукта в массив добавленных товаров
-        }
-    };
-
+    const { cartCount, addedProducts, addProduct } = useCart(); // Извлекаем добавленные продукты и метод для добавления
     return (
         <div className="main">
-            <Header cartCount={cartCount} /> {/* Передаем количество товаров в корзине */}
             <div className="container">
                 {products.map((product, index) => (
                     <div className="card" key={index}>
@@ -82,10 +71,10 @@ const Main = () => {
                                         src={addToCartImage} 
                                         alt="Добавить в корзину" 
                                         className="add-to-cart" 
-                                        onClick={() => addToCart(index)} // Передаем индекс при клике
+                                        onClick={() => addProduct(index)} // Используем метод из контекста
                                     />
                                 ) : (
-                                    <span style={{ marginLeft: '10px', color: 'green' }}>Добавлено</span> // Текст "Добавлено"
+                                    <span style={{ marginLeft: '10px', color: 'green' }}>Добавлено</span>
                                 )}
                             </div>
                         </div>
