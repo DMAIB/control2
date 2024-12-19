@@ -1,4 +1,6 @@
+
 .header {
+    height: 20px;
     background-color: #ffffff; // Цвет фона
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); // Тень
     width: 100%; // Занимаем всю ширину
@@ -11,12 +13,19 @@
     justify-content: center; // Центрируем по горизонтали
     padding: 13px 0; // Отступы сверху и снизу
 
+    
+
     .cart {
-      font-weight: bold;
+        cursor: pointer;
+        font-weight: bold;
         text-decoration: none; // Убираем подчеркивание
         color: #333; // Цвет текста
         font-size: 12px; // Размер шрифта
         transition: color 0.3s; // Плавный переход цвета
+
+        &:hover {
+          color: #EA0C0C; // Цвет текста при наведении
+        }
   }
   
     .nav {
